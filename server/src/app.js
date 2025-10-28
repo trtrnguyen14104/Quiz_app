@@ -1,18 +1,25 @@
 import cors from "cors";
 import express from "express";
-import dotenv from "dotenv/lib/main";
-
-dotenv.config(); //nap bien moi truong .env vao process.env 
+import morgan from "morgan";
+// import adminQuizRoutes from "./routes/admin.route";
+// import studentQuizRoutes from "./routes/student.route";
+// import authRoutes from "./routes/auth.route";
+// import teacherQuizRoutes from "./routes/teacher.route";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-app.use(cors());
-app.use(express.json());
+
+app.use(cors()); //Cho phép truy cập tài nguyên từ domain khác
+app.use(express.json()); 
+app.use(morgan('dev')); //Thông báo mã trạng thái khi có req tới
 
 app.get("/", (req, res) => {
     res.send("Backend is running");
 })
 
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`);
-})
+// //Routes
+// app.use("", adminQuizRoutes);
+// app.use("", teacherQuizRoutes);
+// app.use("", studentQuizRoutes);
+
+export default app;
+
