@@ -1,42 +1,31 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/db";
 
-export class Quiz extends Model {}
+export class User extends Model {}
 
-Quiz.init(
+User.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    teacher_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "user",
-        key: "id",
-      },
-    },
-    title: {
+    email: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    description: {
-      type: DataTypes.TEXT,
-    },
-    category: {
-      type: DataTypes.STRING(50),
+    password: {
+      type: DataTypes.STRING(60),
       allowNull: false,
     },
-    difficult_level: {
-      type: DataTypes.ENUM("easy", "medium", "hard"),
-      defaultValue: "medium",
+    full_name: {
+      type: DataTypes.STRING(255),
     },
-    time_limit: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+    role: {
+      type: DataTypes.ENUM("user", "teacher", "admin"),
+      defaultValue: "user",
     },
-    is_public: {
+    is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
@@ -51,8 +40,8 @@ Quiz.init(
   },
   {
     sequelize: sequelize,
-    modelName: "Quiz",
-    tableName: "quizzes",
+    modelName: "User",
+    tableName: "users",
     createdAt: "created_at",
     updatedAt: "updated_at",
     timestamps: true,
