@@ -12,6 +12,7 @@ Student_answer.init(
     },
     attempt_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: "Quiz_attempt",
         key: "id",
@@ -26,6 +27,7 @@ Student_answer.init(
     },
     answer_id: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: "Answer",
         key: "id",

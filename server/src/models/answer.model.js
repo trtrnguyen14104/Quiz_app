@@ -12,6 +12,7 @@ Answer.init(
     },
     question_id: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
         model: "Question",
         key: "id",

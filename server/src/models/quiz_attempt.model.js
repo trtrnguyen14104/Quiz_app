@@ -12,6 +12,7 @@ Quiz_attempt.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: "User",
         key: "id",
@@ -19,6 +20,7 @@ Quiz_attempt.init(
     },
     quiz_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: "Quiz",
         key: "id",

@@ -1,5 +1,11 @@
 {
+    "name": "quiz-app",
+    "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
+  },
   "dependencies": {
+    "concurrently": "^9.2.1",
     "morgan": "^1.10.1",
     "pg": "^8.16.3"
   }
