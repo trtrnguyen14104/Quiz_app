@@ -3,9 +3,17 @@ import ENV from "./env"
 
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DB_URL, {
+export const sequelize = new Sequelize(ENV.DB_URL, {
     dialect: "postgres",
     logging: false,
 })
 
-export default sequelize;
+export const connectDB = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log("Database connected!");
+        await sequelize.sync({alter: true});
+    } catch (error) {
+        console.error("Database connect failed!");
+    }
+};

@@ -1,53 +1,55 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/db";
 
-export class Student_answer extends Model {}
+export class quizAttempt extends Model {}
 
-Student_answer.init(
+quizAttempt.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    attempt_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Quiz_attempt",
+        model: "User",
         key: "id",
       },
     },
-    question_id: {
+    quiz_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: "Question",
+        model: "Quiz",
         key: "id",
       },
     },
-    answer_id: {
+    score: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: "Answer",
-        key: "id",
-      },
     },
-    answer_text: {
+    total_points: {
+      type: DataTypes.INTEGER,
+    },
+    started_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    completed_at: {
       type: DataTypes.TEXT,
     },
-    is_correct: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+    time_spent: {
+      type: DataTypes.INTEGER,
     },
-    points_earned: {
+    attempt_number: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
   {
     sequelize: sequelize,
-    modelName: "Student",
-    tableName: "students",
+    modelName: "quizAttempt",
+    tableName: "quiz_attempts",
   }
 );

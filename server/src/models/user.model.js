@@ -22,8 +22,8 @@ User.init(
       type: DataTypes.STRING(255),
     },
     role: {
-      type: DataTypes.ENUM("user", "teacher", "admin"),
-      defaultValue: "user",
+      type: DataTypes.ENUM("student", "teacher", "admin"),
+      defaultValue: "student",
     },
     is_active: {
       type: DataTypes.BOOLEAN,
