@@ -1,7 +1,5 @@
-import { Sequelize } from "sequelize"
-import ENV from "./env"
-
-dotenv.config();
+import { Sequelize } from "sequelize";
+import {ENV} from "./env.js";
 
 export const sequelize = new Sequelize(ENV.DB_URL, {
     dialect: "postgres",

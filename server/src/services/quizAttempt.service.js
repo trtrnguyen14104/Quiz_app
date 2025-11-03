@@ -1,4 +1,4 @@
-import { QuizAttempt } from "../models/quizAttempt.model";
+import { QuizAttempt } from "../models/quizAttempt.model.js";
 
 export const createQuizAttempt = async (data) => {
     return await QuizAttempt.create(data);
@@ -17,5 +17,5 @@ export const updateQuizAttempt = async (data, id) => {
 }
 
 export const deleteQuizAttempt = async (id) => {
-    return await QuizAttempt.destroy({where: id});
+    return await QuizAttempt.destroy({where: {id}});
 }

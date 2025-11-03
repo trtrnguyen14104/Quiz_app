@@ -1,4 +1,4 @@
-import { Answer } from "../models/answer.model";
+import { Answer } from "../models/answer.model.js";
 
 export const createAnswer = async (data) => {
     return await Answer.create(data);
@@ -17,5 +17,5 @@ export const updateAnswer = async (data, id) => {
 }
 
 export const deleteAnswer = async (id) => {
-    return await Answer.destroy({where: id});
+    return await Answer.destroy({where: {id}});
 }

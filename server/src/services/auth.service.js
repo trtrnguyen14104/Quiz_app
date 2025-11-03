@@ -1,34 +1,37 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { ENV } from "../config/env";
+import { ENV } from "../config/env.js";
 
 export const register = async (data) => {
     const {email, password, username, role} = data;
 
     const existedUser = await User.findOne({where: {email}});
     if(existedUser) {
-        throw new console.error("Email đã tồn tại");
+        console.error("Email đã tồn tại");
+        return ({wasSuccessful: false, message: "Email đã tồn tại"});
     }
-        const hashedPassword = bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({
             email,
             password: hashedPassword,
             username,
             role,
         });
-    return newUser;
+    return ({wasSuccessful: true, message: "Đăng ký thành công", result: newUser});
 }
 
 export const login = async (email, password) => {
     const existedUser = await User.findOne({where: {email}});
     if(!existedUser) {
-        throw new console.error("Email không tồn tại");
+        console.error("Không tìm thấy email");
+        return ({wasSuccessful: false, message: "Không tìm thấy email"});
     }
 
     const isPasswordValid = await bcrypt.compare(password, existedUser.password);
     if(!isPasswordValid) {
-        throw new console.error("Mật khẩu không chính xác");
+        console.error("Mật khẩu không chính xác");
+        return ({wasSuccessful: false, message: "Mật khẩu không chính xác"});
     }
 
     const token = jwt.sign({
@@ -39,5 +42,5 @@ export const login = async (email, password) => {
     ENV.JWT_SECRET,
     {expiresIn: "1d"}
     );
-    return {success: true, message: "Đăng nhập thành công",token, existedUser};
+    return ({wasSuccessful: true, message: "Đăng nhập thành công",token, existedUser});
 }

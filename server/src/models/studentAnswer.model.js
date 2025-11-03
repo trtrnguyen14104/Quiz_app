@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/db";
+import {sequelize} from "../config/db.js";
 
 export class studentAnswer extends Model {}
 
@@ -48,6 +48,6 @@ studentAnswer.init(
   {
     sequelize: sequelize,
     modelName: "studentAnswer",
-    tableName: "students_Answer",
+    tableName: "students_answer",
   }
 );

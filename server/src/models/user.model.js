@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/db";
+import {sequelize} from "../config/db.js";
 
 export class User extends Model {}
 
@@ -28,6 +28,7 @@ User.init(
     is_active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     },
     //   created_at: {
     //     type: DataTypes.DATE,
